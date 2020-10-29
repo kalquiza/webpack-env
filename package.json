@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kalquiza/webpack-env#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "webpack": "^5.3.1",
     "webpack-cli": "^4.1.0"
   }
