@@ -10,13 +10,16 @@ module.exports = {
     entry: './src/client/index.js',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
-        stats: 'verbose'
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000,
+        stats: 'verbose',
+        publicPath: path.resolve(__dirname, 'dist')
     },
     stats: 'verbose',
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist')
     },
     module: {
         rules: [
@@ -45,6 +48,10 @@ module.exports = {
             // Automatically remove all unused webpack assets on rebuild
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
-        })
-    ]
+        }),
+    ],
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+      },
 };
