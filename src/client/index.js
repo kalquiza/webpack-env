@@ -1,4 +1,6 @@
-  function component() {
+import './styles/style.scss'
+
+function component() {
     const element = document.createElement('div');
 
     element.innerHTML = "Hello, webpack";
