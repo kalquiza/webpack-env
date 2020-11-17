@@ -13,7 +13,8 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
-        stats: 'verbose'
+        stats: 'verbose',
+        injectClient: false
     },
     stats: 'verbose',
     module: {
