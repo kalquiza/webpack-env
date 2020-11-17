@@ -16,10 +16,6 @@ module.exports = {
         stats: 'verbose'
     },
     stats: 'verbose',
-    output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist')
-    },
     module: {
         rules: [
             {
@@ -63,5 +59,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'var',
+        library: 'Client'
     },
-};
+}

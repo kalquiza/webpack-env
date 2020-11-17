@@ -35,5 +35,11 @@ module.exports = {
             template: "./src/client/views/index.html",
             filename: "./index.html",
         })
-    ]
+    ],
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'var',
+        library: 'Client'
+    },
 }
