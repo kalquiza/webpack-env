@@ -1,6 +1,7 @@
 //installed via npm
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
@@ -56,6 +57,7 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        new ESLintPlugin(),
     ],
     output: {
         filename: '[name].bundle.js',
