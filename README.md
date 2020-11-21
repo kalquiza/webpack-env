@@ -90,6 +90,44 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 ```
-Notice in our project directory structure we separate `client` and `server` code appropriately in `./src`. This is important when specifying our webpack entry point later on. Additionally, we serve `index.html` from the `./dist` folder, which is where webpack outputs our production build.
+> Note: in our project directory structure we separate `client` and `server` code appropriately in [`./src`](https://github.com/kalquiza/webpack-env/tree/main/src). This is important when specifying our webpack entry point later on. Additionally, we serve `index.html` from the `./dist` folder, which is where webpack outputs our production build.
+___
+
+## Webpack Configuration
+
+### Configuration File
+Webpack uses a JavaScript file to define and export a webpack configuration. When we run webpack to build our source we specify the configuration like so: 
+```sh
+npx webpack --config ./webpack.config.js
+```
+> Note: We use the npx command which ships with Node 8.2/npm 5.2.0 or higher to run the webpack binary, however it is much more practical to set up shortcuts with [npm scripts](#npm-scripts)
+
+Similar to `npm init` we can use `npx webpack-cli init` to quickly generate a configuration file.
+
+`webpack.config.js`
+```js
+var path = require('path');
+
+module.exports = {
+  mode: 'development',
+  entry: './foo.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'foo.bundle.js'
+  }
+};
+```
+
+What is particularly useful about using a configuration file, is that we can define multiple configurations depending on our needs. This project uses different configurations for development and production in [`webpack.dev.js`](https://github.com/kalquiza/webpack-env/blob/main/webpack.dev.js) and [`webpack.prod.js`](https://github.com/kalquiza/webpack-env/blob/main/webpack.prod.js) respectively.
+
+For more on the webpack configuration file, see the official webpack [documentation](https://webpack.js.org/concepts/configuration/).
 
 ___
+
+### Entry
+### Output
+### Loaders
+### Plugins
+### Mode
+### NPM Scripts
+### Directory Structure
