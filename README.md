@@ -7,8 +7,9 @@
 - [Project Requirements](#project-requirements)
   - [Node.js](#node.js)
   - [Express.js](#express.js)
-- [Webpack Configuration]()
-  - [Entry]()
+- [Webpack Configuration](#webpack-configuration)
+  - [Configuration File](#configuration-file)
+  - [Entry](#entry)
   - [Output]()
   - [Loaders]()
   - [Plugins]()
@@ -125,7 +126,37 @@ For more on the webpack configuration file, see the official webpack [documentat
 ___
 
 ### Entry
+By default webpack uses `./src/index.js` as the entry point to build out it's [dependency graph](https://webpack.js.org/concepts/dependency-graph/).  We can define this in our configuration file: 
+```js
+module.exports = {
+  entry: './path/to/my/entry/file.js'
+};
+```
+In this project we use `./src/client/index.js` for better project orginization and adhering to the separation of concerns design principle. 
+
+> Note: We can also define multiple entries, however whether or not you should depends on your [use case](https://webpack.js.org/concepts/entry-points/#scenarios). In most cases, one should consider [code splitting](https://webpack.js.org/guides/code-splitting/) techniques for optimizing bundles instead of relying on separate entry points and the dependency graphs.
+
 ### Output
+If our entry point defines where we begin building our application in webpack the output is simply where we tell webpack to write out our compiled files. The default output folder is the `./dist` directory.
+
+```js
+module.exports = {
+  entry: {
+    app: './src/app.js',
+    search: './src/search.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/dist'
+  }
+};
+
+// writes to disk: ./dist/app.js, ./dist/search.js
+```
+
+> Note: If the configuration creates more than a single chunk or bundle use [substitutions](https://webpack.js.org/configuration/output/#outputfilename) to ensure unique filenames. In the above example, `[name].bundle.js` uses the entry point to create a unique bundle name.
+___
+
 ### Loaders
 ### Plugins
 ### Mode
