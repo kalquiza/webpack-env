@@ -1,31 +1,11 @@
 # Webpack Development Environment
 
-## Getting Started  
-- [Quick Start]()
-- [What is Webpack?](#what-is-webpack)  
-- [Included in this Project](#included-in-this-project)  
-- [Project Requirements](#project-requirements)
-  - [Node.js](#node.js)
-  - [Express.js](#express.js)
-- [Webpack Configuration](#webpack-configuration)
-  - [Configuration File](#configuration-file)
-  - [Entry](#entry)
-  - [Output]()
-  - [Loaders]()
-  - [Plugins]()
-  - [Mode]()
-  - [NPM Scripts]()
-  - [Directory Structure]()
-  - [Additional Topics]()
-    - [Testing]()
-    - [Environment Variables]()
-
 ## What is Webpack?
 [Webpack](https://webpack.js.org/) is an open-source JavaScript module bundler for modern web applications. With webpack, it easy to organize and manage all our front-end assets, including JavaScript, HTML, CSS, and image assets, and neatly transform them into production-ready code for use in a browser. 
 
 ___
 
-## Included in this Project:
+## Included in this Webpack Configuration:
 This project includes an example of a development environment managed with webpack that is ready to use out of the box. It is configured with the following:
 
 - **Defines a Custom Entry Point**
@@ -48,117 +28,14 @@ This project includes an example of a development environment managed with webpa
 
 - Additional packages:
   - [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) ‒ Development web server with live reloading
-  - [express]() ‒ Back-end web application framework for node to serve the webpack output
+  - [express](https://expressjs.com/) ‒ Back-end web application framework for node to serve the webpack output
 
-This project serves as a place to quickly get started and can be easily be modified for your project's needs. To get the most out of webpack, it is recommended you understand what's going on under the hood, but if you want to hit the ground running with this configuration head over to the [Quick Start]() section.
-___
 
-## Project Requirements
+This project serves as a place to quickly get started and can be easily be modified for your project's needs. To get the most out of webpack, it is recommended you understand what's going on under the hood.
 
-### Node.js
- Node is a JavaScript runtime environment allowing us to run JavaScript code directly in a computer process itself.
+To use this configuration install [node](https://nodejs.dev/) on your system and using the node package manager (npm) run `npm install`.
 
-We will require [Node.js](https://nodejs.org/en/) and the node package manager (*npm*) to install webpack and additional packages. For many of the loaders and plugins we install we will use the following command:
+The npm scripts for building, testing, and running the web application are defined in `package.json`.
 
-```sh
-npm install webpack webpack-cli --save-dev
-```
 
-The ``--save-dev`` flag will add the package under `devDependencies` in your `package.json`. These packages are used for local testing and development in your node package. The `package.json` acts as a project manifest for the node package containing project metadata, configurations, and dependencies.
-
-> Tip: To easily initialize your project's `package.json` file run `npm init`
-
-For the most part, we will be using npm to install webpack and our various loaders, plugins, frameworks, toolkits, and etcetera for development. 
-
-### Express.js
-To serve the static assets that we build from webpack we will spin up a simple [Express](https://expressjs.com/) server. Because our web application will be running the server in the background, we install it with the `--save` flag to save it under `dependencies`.
-
-`./src/client/app.js`
-```js
-const express = require('express')
-const app = express()
-const port = 3000
-
-app.use(express.static('dist'))
-
-console.log(__dirname)
-
-app.get('/', function (req, res) {
-  res.sendFile('dist/index.html')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-```
-> Note: in our project directory structure we separate `client` and `server` code appropriately in [`./src`](https://github.com/kalquiza/webpack-env/tree/main/src). This is important when specifying our webpack entry point later on. Additionally, we serve `index.html` from the `./dist` folder, which is where webpack outputs our production build.
-___
-
-## Webpack Configuration
-
-### Configuration File
-Webpack uses a JavaScript file to define and export a webpack configuration. When we run webpack to build our source we specify the configuration like so: 
-```sh
-npx webpack --config ./webpack.config.js
-```
-> Note: We use the npx command which ships with Node 8.2/npm 5.2.0 or higher to run the webpack binary, however it is much more practical to set up shortcuts with [npm scripts](#npm-scripts)
-
-Similar to `npm init` we can use `npx webpack-cli init` to quickly generate a configuration file.
-
-`webpack.config.js`
-```js
-var path = require('path');
-
-module.exports = {
-  mode: 'development',
-  entry: './foo.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'foo.bundle.js'
-  }
-};
-```
-
-What is particularly useful about using a configuration file, is that we can define multiple configurations depending on our needs. This project uses different configurations for development and production in [`webpack.dev.js`](https://github.com/kalquiza/webpack-env/blob/main/webpack.dev.js) and [`webpack.prod.js`](https://github.com/kalquiza/webpack-env/blob/main/webpack.prod.js) respectively.
-
-For more on the webpack configuration file, see the official webpack [documentation](https://webpack.js.org/concepts/configuration/).
-
-___
-
-### Entry
-By default webpack uses `./src/index.js` as the entry point to build out it's [dependency graph](https://webpack.js.org/concepts/dependency-graph/).  We can define this in our configuration file: 
-```js
-module.exports = {
-  entry: './path/to/my/entry/file.js'
-};
-```
-In this project we use `./src/client/index.js` for better project orginization and adhering to the separation of concerns design principle. 
-
-> Note: We can also define multiple entries, however whether or not you should depends on your [use case](https://webpack.js.org/concepts/entry-points/#scenarios). In most cases, one should consider [code splitting](https://webpack.js.org/guides/code-splitting/) techniques for optimizing bundles instead of relying on separate entry points and the dependency graphs.
-
-### Output
-If our entry point defines where we begin building our application in webpack the output is simply where we tell webpack to write out our compiled files. The default output folder is the `./dist` directory.
-
-```js
-module.exports = {
-  entry: {
-    app: './src/app.js',
-    search: './src/search.js'
-  },
-  output: {
-    filename: '[name].js',
-    path: __dirname + '/dist'
-  }
-};
-
-// writes to disk: ./dist/app.js, ./dist/search.js
-```
-
-> Note: If the configuration creates more than a single chunk or bundle use [substitutions](https://webpack.js.org/configuration/output/#outputfilename) to ensure unique filenames. In the above example, `[name].bundle.js` uses the entry point to create a unique bundle name.
-___
-
-### Loaders
-### Plugins
-### Mode
-### NPM Scripts
-### Directory Structure
+For more on understanding webpack concepts refer to the official [webpack documentation](https://webpack.js.org/concepts/).
