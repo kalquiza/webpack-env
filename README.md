@@ -29,13 +29,13 @@ This project includes an example of a development environment managed with webpa
 - Additional packages:
   - [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) ‒ Development web server with live reloading
   - [express](https://expressjs.com/) ‒ Back-end web application framework for node to serve the webpack output
+  - [jest](https://webpack.js.org/contribute/writing-a-loader/#testing) ‒ JavaScript testing framework
 
 
 This project serves as a place to quickly get started and can be easily be modified for your project's needs. To get the most out of webpack, it is recommended you understand what's going on under the hood.
 
 To use this configuration install [node](https://nodejs.dev/) on your system and using the node package manager (npm) run `npm install`.
 
-The npm scripts for building, testing, and running the web application are defined in `package.json`.
-
+The npm scripts for building, testing, and running the web application are defined in `package.json`. Included scripts: `npm start`, `npm test`, `npm run build-dev`, `npm build-prod`
 
 For more on understanding webpack concepts refer to the official [webpack documentation](https://webpack.js.org/concepts/).
