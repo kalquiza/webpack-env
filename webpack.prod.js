@@ -34,13 +34,19 @@ module.exports = {
         test: /.s?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Web Application',
+      title: 'React Web Application',
       template: './src/client/views/index.html',
       filename: './index.html',
+      favicon: './src/client/public/favicon.ico',
+      manifest: './src/client/public/manifest.json',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

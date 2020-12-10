@@ -42,12 +42,19 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'React Web Application',
       template: './src/client/views/index.html',
       filename: './index.html',
+      favicon: './src/client/public/favicon.ico',
+      manifest: './src/client/public/manifest.json',
     }),
     new CleanWebpackPlugin({
       // Simulate the removal of files
